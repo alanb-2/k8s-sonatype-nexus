@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonatype-nexus-deployment
+  namespace: sonatype-nexus
+  labels:
+    app: sonatype-nexus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonatype-nexus
+  template:
+    metadata:
+      labels:
+        app: sonatype-nexus
+    spec:
+      containers:
+        - name: sonatype-nexus
+          image: sonatype/nexus3:3.30.1
+
+          ports:
+            - name: sonatype-nexus
+              containerPort: 8081
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /nexus-data
+              name: sonatype-nexus-data
+      volumes:
+        - name: sonatype-nexus-data
+          emptyDir: {}
