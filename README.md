@@ -43,13 +43,36 @@ To access the Sonatype Nexus cluster from your machine, port-forwarding can be u
     curl http://localhost:30081/
     ```
     
-3.  Open a browser and navigate to `curl http://localhost:30081/` to access the Sonatype Nexus GUI.
+3.  Open a browser and navigate to `http://localhost:30081/` to access the Sonatype Nexus GUI.
 
 4.  Sign in as the `admin` user to make changes.  The password can be found inside `/nexus-data/admin.password` within the pod.
     ```shell
     kubectl exec -it $POD_NAME -- /bin/sh
     ```
     where $POD_NAME is the name of the Sonatype Nexus pod from `kubctl get pods`
+
+### Create a repository
+
+#### PyPi
+
+1.  Log into the GUI with an administrator account if not already logged in.
+
+2.  Click on the "Server administration and configuration" icon in the top ribbon (cog/gear emblem).
+
+3.  Click on "Repositories" in the left-hand menu.
+
+4.  In the new window, click on "Create repository".
+
+5.  Create the following repositories in order:
+    
+    | Type | Name | Comments |
+    | ---- | ---- | -------- |
+    | `pypi (proxy)` | pypi-proxy | Use `https://pypi.org` as the URI |
+    | `pypi (hosted)` | pypi-private | - |
+    | `pypi (group)` | pypi-group | Make `pypi-private` and `pypi-proxy` members of the group and move `pypi-private` to the top of the list so it is scanned first |
+    
+6.  To get the `pypi-group` repository URL click on the repository from the "Repositories" window to bring up the configuration pane.
+    "/simple" should be appended to the URL when using it with any project configuration.
 
 ## Resources
 
