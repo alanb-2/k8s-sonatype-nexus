@@ -4,9 +4,9 @@ Contains a configuration to spin up a Sonatype Nexus instance inside a kubernete
 
 ## Prerequisites
 
-* kind
-* kubectl
-* Sonatype Nexus
+* `docker`
+* `kind`
+* `kubectl`
 
 Note: Depending on the OS, it may be necessary to prefix all commands with `sudo`.
 
@@ -49,7 +49,7 @@ To access the Sonatype Nexus cluster from your machine, port-forwarding can be u
     ```shell
     kubectl exec -it $POD_NAME -- /bin/sh
     ```
-    where $POD_NAME is the name of the Sonatype Nexus pod from `kubctl get pods`
+    where `POD_NAME` is the name of the Sonatype Nexus pod from `kubctl get pods`
 
 ### Create a repository
 
@@ -67,9 +67,9 @@ To access the Sonatype Nexus cluster from your machine, port-forwarding can be u
     
     | Type | Name | Comments |
     | ---- | ---- | -------- |
-    | `pypi (proxy)` | pypi-proxy | Use `https://pypi.org` as the URI |
-    | `pypi (hosted)` | pypi-private | - |
-    | `pypi (group)` | pypi-group | Make `pypi-private` and `pypi-proxy` members of the group and move `pypi-private` to the top of the list so it is scanned first |
+    | `pypi (proxy)` | pypi-proxy | Use `https://pypi.org` as the URI.  Uncheck the "Online" box |
+    | `pypi (hosted)` | pypi-private | Check the "Online" box |
+    | `pypi (group)` | pypi-group | Make `pypi-private` and `pypi-proxy` members of the group and move `pypi-private` to the top of the list so it is scanned first.  Check the "Online" box |
     
 6.  To get the `pypi-group` repository URL click on the repository from the "Repositories" window to bring up the configuration pane.
     "/simple" should be appended to the URL when using it with any project configuration.
