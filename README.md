@@ -72,7 +72,7 @@ To access the Sonatype Nexus cluster from your machine, port-forwarding can be u
     | `pypi (group)` | pypi-group | Make `pypi-private` and `pypi-proxy` members of the group and move `pypi-private` to the top of the list so it is scanned first.  Check the "Online" box |
     
 6.  To get the `pypi-group` repository URL click on the repository from the "Repositories" window to bring up the configuration pane.
-    "/simple" should be appended to the URL when using it with any project configuration.
+    "/simple" should be appended to the URL when downloading dependencies with any project configuration.
 
 ## Resources
 
