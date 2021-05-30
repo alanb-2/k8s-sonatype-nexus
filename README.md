@@ -39,7 +39,7 @@ Dockerhub.
 
 1.  Create the `kind` cluster:
     ```shell
-    ./kind/create_local_cluster_with_registry.sh
+    ./kind/create_local_cluster_with_registry.sh -n registry -p 5000
     ```
 
 2.  Set the cluster config:
