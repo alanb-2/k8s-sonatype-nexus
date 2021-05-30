@@ -56,7 +56,7 @@ Dockerhub.
 
 4.  Deploy the Sonatype Nexus instance:
     ```shell
-    kubectl apply -k k8s/overalys/local-with-registry/
+    kubectl apply -k k8s/overlays/local-with-registry/
     ```
 
 ## Usage
