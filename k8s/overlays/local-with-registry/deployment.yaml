@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonatype-nexus-deployment
+  namespace: sonatype-nexus
+  labels:
+    app: sonatype-nexus
+spec:
+  template:
+    spec:
+      containers:
+        - name: sonatype-nexus
+          image: localhost:5000/sonatype/nexus3:3.30.1

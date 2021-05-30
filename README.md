@@ -12,11 +12,15 @@ Note: Depending on the OS, it may be necessary to prefix all commands with `sudo
 
 ## Configuration
 
+### Local
+
+This option pulls the Sonatype Nexus image directly from Dockerhub.
+
 1.  Create the `kind` cluster:
     ```shell
-    kind create cluster --name=sonatype-nexus --config=kind/config.yaml
+    ./kind/create_local_cluster.sh
     ```
-    
+
 2.  Set the cluster config:
     ```shell
     kubectl cluster-info --context kind-sonatype-nexus
@@ -24,7 +28,35 @@ Note: Depending on the OS, it may be necessary to prefix all commands with `sudo
 
 3.  Deploy the Sonatype Nexus instance:
     ```shell
-    kubectl apply -k k8s/local/
+    kubectl apply -k k8s/overalys/local/
+    ```
+
+### Local with local registry
+
+This option creates a local Docker registry and pushes the Sonatype Nexus image to it.  This can shorten development
+times if the kubernetes deployment is being rebuilt regularly as the image is being retrieved locally rather than from
+Dockerhub.
+
+1.  Create the `kind` cluster:
+    ```shell
+    ./kind/create_local_cluster_with_registry.sh
+    ```
+
+2.  Set the cluster config:
+    ```shell
+    kubectl cluster-info --context kind-sonatype-nexus
+    ```
+
+3.  Pull the Sonatype Nexus Docker image, tag it and push it to the local Docker registry:
+    ```shell
+    docker pull sonatype/nexus3:3.30.1
+    docker tag sonatype/nexus3:3.30.1 localhost:5000/sonatype/nexus3:3.30.1
+    docker push localhost:5000/sonatype/nexus3:3.30.1
+    ```
+
+4.  Deploy the Sonatype Nexus instance:
+    ```shell
+    kubectl apply -k k8s/overalys/local-with-registry/
     ```
 
 ## Usage
